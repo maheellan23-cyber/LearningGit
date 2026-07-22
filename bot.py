@@ -34,6 +34,22 @@ class MinimaxBot:
         if "" not in board: return 0
 
         # --- CODE PLACEHOLDER ---
+        if is_maximizing:
+            best = -float('inf')
+            for i in range(9):
+                if board[i] == "":
+                    board[i] = self.bot  # try bot move
+                    best = max(best, self.minimax(board, depth + 1, False))
+                    board[i] = ""  # undo move
+            return best
+        else:
+            best = float('inf')
+            for i in range(9):
+                if board[i] == "":
+                    board[i] = self.human  # try human move
+                    best = min(best, self.minimax(board, depth + 1, True))
+                    board[i] = ""  # undo move
+            return best
         # Implement the recursive minimax search here.
         # Steps to complete:
         #  1) Iterate over every empty cell in the board.
